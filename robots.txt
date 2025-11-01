@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://79club.art/sitemap.xml
+Sitemap: https://79club.asia/sitemap.xml
