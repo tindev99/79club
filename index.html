@@ -58,7 +58,7 @@
 
     <link rel="preload" as="style" href="style-mobile.6e9cd.css" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="style-mobile.6e9cd.css"></noscript>
-    <link rel="stylesheet" type="text/css" href="custom.css"/>
+    
     <link rel="icon" href="favicon.8de18.ico"/>
     <link rel="canonical" href="https://79club.boutique/" />
     <link rel="preload" as="image" href="/banner-79club.webp">
@@ -160,6 +160,245 @@
         ]
     }
     </script>
+
+    <style>
+        body {
+            position: static;
+            height: auto;
+            overflow-y: auto;
+        }
+
+        /* Page */
+        body.page {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            background: url("/img/background_darker.jpg") no-repeat center center fixed;
+            background-size: cover;
+            font-family: Helvetica, Verdana, Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #1a1a2e, #24114d);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .header-logo img {
+            max-height: 90px;
+        }
+
+        .header-button {
+            display: flex;
+            align-items: center;
+            gap: 15px; 
+        }
+
+        .header-button img {
+            max-height: 50px;
+        }
+
+        #main {
+            flex: 1 1 auto;              
+            display: flex;               
+            justify-content: center;     
+            align-items: flex-start; 
+            padding: 15px 15px;
+            margin-top: 115px;
+            padding-bottom: 120px;
+        }
+
+        #content {
+            width: 100%;
+            max-width: 1200px; 
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.1);
+            color: #f2f2f2;
+            font-weight: 400;
+            font-style: normal;
+            line-height: 1.6;
+            font-family: Lexend, -apple-system, system-ui, BlinkMacSystemFont, Arial, sans-serif
+        }
+
+        .entry-header {
+            margin-bottom: 2em;
+        }
+
+        .entry-divider {
+            display: block;
+            height: 3px;
+            margin: 1em 0;
+            max-width: 30px;
+            width: 100%;
+        }
+
+        @media (max-width: 549px) {
+            .header-container {
+                flex-direction: column;
+                padding: 10px;
+            }
+            
+            .header-logo img {
+                max-height: 70px;
+            }
+
+            .header-button {
+                gap: 10px;
+            }
+
+            .header-button img {
+                max-height: 40px;
+            }
+
+            #main {
+                margin-top: 138px;
+            }
+        }
+
+        .wp-block-image {
+            text-align: center;
+            margin: 0;
+        }
+
+        .wp-block-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .figure-caption {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        /* End Page */
+
+        a {
+            color: #b388ff !important;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #e0b3ff;
+            text-shadow: 0 0 6px rgba(179, 136, 255, 0.7);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 500;
+            font-style: normal;
+            /* color: #b388ff; */
+            background: linear-gradient(90deg, #b388ff, #ff4dfc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: .5em;
+        }
+
+        #Cocos2dGameContainer {
+            position: static;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #GameCanvas {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #splash {
+            background-size: cover !important;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: block; /* Ensure the splash element is displayed */
+        }
+
+        #footer {
+            width: 100%;
+            background: linear-gradient(90deg, #1a1a2e, #24114d);
+            border-top: 1px solid rgba(255, 255, 255, 0.15); /* viền trắng mờ */
+            box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            text-align: left;
+        }
+
+        #footer p {
+            line-height: 1.5;
+        }
+
+        #footer ul {
+            padding: 0 20px;
+        }
+
+        #footer ul > li {
+            margin-bottom: 5px;
+        }
+
+        .footer-copyright {
+            margin-top: 15px;
+            margin-bottom: 0;
+            padding-bottom: 10px;
+            text-align: center;
+            color: #b388ff;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr 1fr 1fr;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer-col {
+            padding: 0 20px;
+        }
+
+        .footer-item {
+            border-bottom: 1px solid #fff;
+            padding: 8px 0;
+        }
+
+        .footer-item:last-child {
+            border-bottom: none;
+        }
+
+        .footer-item a {
+            color: #fff !important;
+        }
+
+        .footer-item a:hover {
+            color: #b388ff !important;
+            text-shadow: 0 0 6px rgba(179, 136, 255, 0.7);
+        }
+
+        #hero {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
 
