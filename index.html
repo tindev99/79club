@@ -22,16 +22,6 @@
     <meta name="twitter:description" content="79CLUB - Cổng game đổi thưởng hàng đầu Việt Nam. Xanh chín, minh bạch, nạp rút an toàn, CSKH 24/7, kho game đa dạng: tài xỉu, baccarat, slot, xổ số." />
     <meta name="twitter:image" content="https://79club.boutique/logo-79club.png" />
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W79P811PPH"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-W79P811PPH');
-    </script>
-
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -518,7 +508,7 @@
 window.addEventListener('DOMContentLoaded', () => {
     (function () {
         // open web debugger console
-        if (typeof VConsole !== 'undefined') {
+        if (typeof VConsole !== 'undefined' && window._CCSettings && window._CCSettings.debug) {
             window.vConsole = new VConsole();
         }
 
@@ -611,6 +601,41 @@ window.addEventListener('DOMContentLoaded', () => {
         install();
     })();
 });
+</script>
+
+<script>
+(function() {
+    'use strict';
+    const blockedFiles = ['en_US/base.js', 'www-embed-player-pc.js'];
+    function shouldBlock(url) {
+        if (!url || typeof url !== 'string') return false;
+        if (!url.includes('youtube.com') && !url.includes('youtu.be')) return false;
+        return blockedFiles.some(file => url.includes(file));
+    }
+    const originalFetch = window.fetch;
+    window.fetch = function(...args) {
+        const url = args[0];
+        if (shouldBlock(url)) {
+            return Promise.reject(new Error('Blocked YouTube JS'));
+        }
+        return originalFetch.apply(this, args);
+    };
+    const originalXHROpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function(method, url, ...rest) {
+        if (shouldBlock(url)) return;
+        return originalXHROpen.apply(this, [method, url, ...rest]);
+    };
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            mutation.addedNodes.forEach(function(node) {
+                if (node.tagName === 'SCRIPT' && node.src && shouldBlock(node.src)) {
+                    node.remove();
+                }
+            });
+        });
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+})();
 </script>
 
 </body>
