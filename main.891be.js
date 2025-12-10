@@ -102,41 +102,30 @@ window.boot = function () {
     var bundleRoot = [INTERNAL];
     settings.hasResourcesBundle && bundleRoot.push(RESOURCES);
 
-    var count = 0;
-    var currentBundleIndex = 0;
-    
-    function loadNextBundle() {
-        if (currentBundleIndex >= bundleRoot.length) {
-            // Đã load xong tất cả bundles, load MAIN
-            // Delay để không block
-            setTimeout(function() {
-                cc.assetManager.loadBundle(MAIN, function (err) {
-                    if (!err) {
-                        // Delay thêm trước khi run game
-                        setTimeout(function() {
-                            cc.game.run(option, onStart);
-                        }, 200);
-                    }
-                });
-            }, 100);
-            return;
-        }
-        
-        // Load từng bundle một, mỗi bundle cách nhau 200ms để chia nhỏ long tasks
-        cc.assetManager.loadBundle(bundleRoot[currentBundleIndex], function (err) {
+    function startGame () {
+        var count = 0;
+        function cb (err) {
             if (err) return console.error(err.message, err.stack);
-            currentBundleIndex++;
-            // Delay 200ms giữa các bundle để không block main thread
-            setTimeout(loadNextBundle, 200);
-        });
+            count++;
+            if (count === bundleRoot.length + 1) {
+                cc.assetManager.loadBundle(MAIN, function (err) {
+                    if (!err) cc.game.run(option, onStart);
+                });
+            }
+        }
+
+        cc.assetManager.loadScript(settings.jsList.map(function (x) { return 'src/' + x;}), cb);
+
+        for (var i = 0; i < bundleRoot.length; i++) {
+            cc.assetManager.loadBundle(bundleRoot[i], cb);
+        }
     }
-    
-    // Load scripts trước
-    cc.assetManager.loadScript(settings.jsList.map(function (x) { return 'src/' + x;}), function(err) {
-        if (err) return console.error(err.message, err.stack);
-        // Delay trước khi load bundles
-        setTimeout(loadNextBundle, 100);
-    });
+
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(startGame);
+    } else {
+        setTimeout(startGame, 200);
+    }
 };
 
 if (window.jsb) {
