@@ -108,21 +108,33 @@ window.boot = function () {
     settings.hasResourcesBundle && bundleRoot.push(RESOURCES);
 
     var count = 0;
-    function cb (err) {
-        if (err) return console.error(err.message, err.stack);
-        count++;
-        if (count === bundleRoot.length + 1) {
-            cc.assetManager.loadBundle(MAIN, function (err) {
-                if (!err) cc.game.run(option, onStart);
-            });
+    var currentBundleIndex = 0;
+    
+    function loadNextBundle() {
+        if (currentBundleIndex >= bundleRoot.length) {
+            setTimeout(function() {
+                cc.assetManager.loadBundle(MAIN, function (err) {
+                    if (!err) {
+                        setTimeout(function() {
+                            cc.game.run(option, onStart);
+                        }, 200);
+                    }
+                });
+            }, 100);
+            return;
         }
+        
+        cc.assetManager.loadBundle(bundleRoot[currentBundleIndex], function (err) {
+            if (err) return console.error(err.message, err.stack);
+            currentBundleIndex++;
+            setTimeout(loadNextBundle, 200);
+        });
     }
-
-    cc.assetManager.loadScript(settings.jsList.map(function (x) { return 'src/' + x;}), cb);
-
-    for (var i = 0; i < bundleRoot.length; i++) {
-        cc.assetManager.loadBundle(bundleRoot[i], cb);
-    }
+    
+    cc.assetManager.loadScript(settings.jsList.map(function (x) { return 'src/' + x;}), function(err) {
+        if (err) return console.error(err.message, err.stack);
+        setTimeout(loadNextBundle, 100);
+    });
 };
 
 if (window.jsb) {
