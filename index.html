@@ -539,12 +539,13 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
         loadScript(debug ? 'cocos2d-js.js' : 'cocos2d-js-min.c8651.js', function () {
-            if (CC_PHYSICS_BUILTIN || CC_PHYSICS_CANNON) {
+            /* if (CC_PHYSICS_BUILTIN || CC_PHYSICS_CANNON) {
                 loadScript(debug ? 'physics.js' : 'physics-min.ce5ee.js', window.boot);
             }
             else {
                 window.boot();
-            }
+            } */
+            window.boot();
         });
     })();
 
