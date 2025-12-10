@@ -98,6 +98,11 @@ window.boot = function () {
         remoteBundles: settings.remoteBundles,
         server: settings.server
     });
+
+    if (cc.sys.isBrowser) {
+        cc.assetManager.downloader.maxConcurrency = 2;
+        cc.assetManager.downloader.maxRequestsPerFrame = 2;
+    }
     
     var bundleRoot = [INTERNAL];
     settings.hasResourcesBundle && bundleRoot.push(RESOURCES);
