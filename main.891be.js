@@ -98,11 +98,6 @@ window.boot = function () {
         remoteBundles: settings.remoteBundles,
         server: settings.server
     });
-
-    if (cc.sys.isBrowser) {
-        cc.assetManager.downloader.maxConcurrency = 2;
-        cc.assetManager.downloader.maxRequestsPerFrame = 2;
-    }
     
     var bundleRoot = [INTERNAL];
     settings.hasResourcesBundle && bundleRoot.push(RESOURCES);
@@ -112,9 +107,12 @@ window.boot = function () {
     
     function loadNextBundle() {
         if (currentBundleIndex >= bundleRoot.length) {
+            // Đã load xong tất cả bundles, load MAIN
+            // Delay để không block
             setTimeout(function() {
                 cc.assetManager.loadBundle(MAIN, function (err) {
                     if (!err) {
+                        // Delay thêm trước khi run game
                         setTimeout(function() {
                             cc.game.run(option, onStart);
                         }, 200);
@@ -124,15 +122,19 @@ window.boot = function () {
             return;
         }
         
+        // Load từng bundle một, mỗi bundle cách nhau 200ms để chia nhỏ long tasks
         cc.assetManager.loadBundle(bundleRoot[currentBundleIndex], function (err) {
             if (err) return console.error(err.message, err.stack);
             currentBundleIndex++;
+            // Delay 200ms giữa các bundle để không block main thread
             setTimeout(loadNextBundle, 200);
         });
     }
     
+    // Load scripts trước
     cc.assetManager.loadScript(settings.jsList.map(function (x) { return 'src/' + x;}), function(err) {
         if (err) return console.error(err.message, err.stack);
+        // Delay trước khi load bundles
         setTimeout(loadNextBundle, 100);
     });
 };
