@@ -60,44 +60,7 @@
     <link rel="stylesheet" type="text/css" href="custom.css"/>
     <link rel="icon" href="favicon.8de18.ico"/>
     <link rel="canonical" href="https://79club.boutique/" />
-
-    <!-- Meta Pixel Code -->
-    <script>
-        (function() {
-            const currentDomain = window.location.hostname;
-            const pixelMap = {
-                '79club.website': '908084224873212',
-                '79codesieukhung.pro': '455341731001137',
-                'tai79club1.win': '745643231073166',
-                'tai79club.win': '1201295350975564',
-                '79club.app': '675874671497195',
-                '79club.me': '1205884087912774',
-                '79club.click': '1897301097730649',
-                '79club.bar': '770583871994971'
-            };
-            const pixelId = pixelMap[currentDomain];
-            if (pixelId) {
-                !function(f,b,e,v,n,t,s)
-                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-                    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-                    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-                    n.queue=[];t=b.createElement(e);t.async=!0;
-                    t.src=v;s=b.getElementsByTagName(e)[0];
-                    s.parentNode.insertBefore(t,s)}(window, document,'script',
-                    'https://connect.facebook.net/en_US/fbevents.js');
-                fbq('init', pixelId);
-                fbq('track', 'PageView');
-                console.log(`Pixel initialized for domain: ${currentDomain} with ID: ${pixelId}`);
-            }
-            else {
-                console.warn(`No Pixel configured for domain: ${currentDomain}`);
-            }
-        })();
-    </script>
-    <noscript>
-        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=908084224873212&ev=PageView&noscript=1" alt="" />
-    </noscript>
-    <!-- End Meta Pixel Code -->
+    <link rel="preload" as="image" href="/banner-79club.jpg">
 
     <!-- JSON-LD: Organization + Website + WebPage -->
     <script type="application/ld+json">
@@ -198,6 +161,10 @@
     </script>
 </head>
 <body>
+
+<div id="hero" aria-label="79CLUB">
+    <img src="/banner-79club.jpg" alt="79CLUB" width="800" height="400" loading="eager">
+</div>
 
 <canvas id="GameCanvas" oncontextmenu="event.preventDefault()" tabindex="0"></canvas>
 
@@ -302,11 +269,12 @@
     <p class="footer-copyright">© 2018-2025 79CLUB. All rights reserved.</p>
 </footer>
 
-<script src="src/settings.e6eb6.js" charset="utf-8"></script>
+<script src="src/settings.e6eb6.js" charset="utf-8" defer></script>
 
-<script src="main.891be.js" charset="utf-8"></script>
+<script src="main.891be.js" charset="utf-8" defer></script>
 
 <script type="text/javascript">
+window.addEventListener('DOMContentLoaded', () => {
     (function () {
         // open web debugger console
         if (typeof VConsole !== 'undefined') {
@@ -387,6 +355,7 @@
         }
         install();
     })();
+});
 </script>
 
 </body>
