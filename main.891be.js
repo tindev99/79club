@@ -88,7 +88,7 @@ window.boot = function () {
         id: 'GameCanvas',
         debugMode: settings.debug ? cc.debug.DebugMode.INFO : cc.debug.DebugMode.ERROR,
         showFPS: settings.debug,
-        frameRate: 30,
+        frameRate: 60,
         groupList: settings.groupList,
         collisionMatrix: settings.collisionMatrix,
     };
