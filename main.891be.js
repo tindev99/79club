@@ -122,9 +122,9 @@ window.boot = function () {
     }
 
     if ('requestIdleCallback' in window) {
-        requestIdleCallback(startGame);
+        requestIdleCallback(startGame, { timeout: 2000 });
     } else {
-        setTimeout(startGame, 200);
+        setTimeout(startGame, 1000);
     }
 };
 
