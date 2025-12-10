@@ -161,6 +161,7 @@
             const element = originalCreateElement.call(this, tagName, options);
             if (tagName.toLowerCase() === 'iframe') {
                 element.setAttribute('loading', 'lazy');
+                element.setAttribute('title', 'Video giới thiệu sự kiện 79CLUB');
             }
             return element;
         };
