@@ -56,11 +56,15 @@
     <!--fix fireball/issues/3568 -->
     <meta name="x5-page-mode" content="app">
 
-    <link rel="stylesheet" type="text/css" href="style-mobile.6e9cd.css"/>
-    <link rel="stylesheet" type="text/css" href="custom.css"/>
+    <link rel="preload" as="style" href="style-mobile.6e9cd.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="style-mobile.6e9cd.css"></noscript>
+
+    <link rel="preload" as="style" href="custom.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="custom.css"></noscript>
+    
     <link rel="icon" href="favicon.8de18.ico"/>
     <link rel="canonical" href="https://79club.boutique/" />
-    <link rel="preload" as="image" href="/banner-79club.jpg">
+    <link rel="preload" as="image" href="/banner-79club.webp">
 
     <!-- JSON-LD: Organization + Website + WebPage -->
     <script type="application/ld+json">
@@ -163,7 +167,7 @@
 <body>
 
 <div id="hero" aria-label="79CLUB">
-    <img src="/banner-79club.jpg" alt="79CLUB" width="800" height="400" loading="eager">
+    <img src="/banner-79club.webp" alt="79CLUB" width="1400" height="700" loading="eager">
 </div>
 
 <canvas id="GameCanvas" oncontextmenu="event.preventDefault()" tabindex="0"></canvas>
