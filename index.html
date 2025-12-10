@@ -562,9 +562,9 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
         if ('requestIdleCallback' in window) {
-            requestIdleCallback(initCocos, { timeout: 100 });
+            requestIdleCallback(initCocos, { timeout: 1000 });
         } else {
-            setTimeout(initCocos, 200);
+            setTimeout(initCocos, 500);
         }
     })();
 
