@@ -545,17 +545,17 @@ window.addEventListener('DOMContentLoaded', () => {
             document.body.appendChild(domScript);
         }
 
-        /* loadScript(debug ? 'cocos2d-js.js' : 'cocos2d-js-min.c8651.js', function () {
-            if (CC_PHYSICS_BUILTIN || CC_PHYSICS_CANNON) {
+        loadScript(debug ? 'cocos2d-js.js' : 'cocos2d-js-min.c8651.js', function () {
+            /* if (CC_PHYSICS_BUILTIN || CC_PHYSICS_CANNON) {
                 loadScript(debug ? 'physics.js' : 'physics-min.ce5ee.js', window.boot);
             }
             else {
                 window.boot();
-            }
+            } */
             window.boot();
-        }); */
+        });
 
-        function initCocos() {
+        /* function initCocos() {
             loadScript(debug ? 'cocos2d-js.js' : 'cocos2d-js-min.c8651.js', function () {
                 window.boot();
             });
@@ -565,7 +565,7 @@ window.addEventListener('DOMContentLoaded', () => {
             requestIdleCallback(initCocos, { timeout: 2000 });
         } else {
             setTimeout(initCocos, 1000);
-        }
+        } */
     })();
 
     //wheel
